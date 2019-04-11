@@ -1,11 +1,12 @@
 package fr.basileparent.unitTestWorkshop.service;
 
-import fr.basileparent.unitTestWorkshop.model.Pony;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import fr.basileparent.unitTestWorkshop.model.Pony;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +18,7 @@ public class PonyServiceIntegrationTest {
     private PonyService ponyService;
 
     @Test
-    public void getGender_shouldReturn1_whenPonyIsMale() {
+    public void getGender_should_return_1_when_pony_is_male() {
         // Given
         Pony pony = new Pony();
         pony.setSex("MALE");

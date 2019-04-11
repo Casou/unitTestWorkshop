@@ -1,17 +1,16 @@
 package fr.basileparent.unitTestWorkshop.repository;
 
-import fr.basileparent.unitTestWorkshop.model.Pony;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
+import fr.basileparent.unitTestWorkshop.model.Pony;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @DataJpaTest
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,7 +24,7 @@ public class PonyRepositoryTest {
      *  C'est uniquement pour prouver qu'il ne doit pas avoir d'incidence sur les autres tests.
      */
     @Test
-    public void save_shouldNotInterfereWithOtherTests() {
+    public void save_should_not_interfere_with_other_tests() {
         // Given
         Pony p = new Pony();
         p.setId(1000);
@@ -44,7 +43,7 @@ public class PonyRepositoryTest {
     }
 
     @Test
-    public void findAll_shouldReturn3Entries() {
+    public void findAll_should_return_3_entries() {
         // Given (nothing - data in data-test.sql)
 
         // When
@@ -55,7 +54,7 @@ public class PonyRepositoryTest {
     }
 
     @Test
-    public void findTooOldPonies_shouldReturn1Pony_olderThan10Years() {
+    public void findTooOldPonies_should_return_1_pony_older_than_10_years() {
         // Given (nothing - data in data-test.sql)
 
         // When
@@ -67,7 +66,7 @@ public class PonyRepositoryTest {
     }
 
     @Test
-    public void findTooOldPonies_shouldReturn2Pony_olderThan2Years() {
+    public void findTooOldPonies_should_return_2_pony_older_than_2_years() {
         // Given (nothing - data in data-test.sql)
 
         // When

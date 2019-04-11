@@ -1,8 +1,7 @@
 package fr.basileparent.unitTestWorkshop.service;
 
-import fr.basileparent.unitTestWorkshop.factory.MyFarm;
-import fr.basileparent.unitTestWorkshop.model.Pony;
-import fr.basileparent.unitTestWorkshop.repository.PonyRepository;
+import java.time.LocalDate;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -10,13 +9,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.LocalDate;
+import fr.basileparent.unitTestWorkshop.factory.MyFarm;
+import fr.basileparent.unitTestWorkshop.model.Pony;
+import fr.basileparent.unitTestWorkshop.repository.PonyRepository;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class PonyServiceTest {
 
@@ -38,7 +37,7 @@ public class PonyServiceTest {
     }
 
     @Test
-    public void getGender_shouldReturn1_whenPonyIsMale() {
+    public void getGender_should_return_1_when_pony_is_male() {
         // Given
         Pony pony = new Pony();
         pony.setSex("MALE");
@@ -51,7 +50,7 @@ public class PonyServiceTest {
     }
 
     @Test
-    public void createPony_shouldReturnPonyCreatedByFactory() {
+    public void createPony_should_return_pony_created_by_factory() {
         // Given
         Pony mockedPony = new Pony();
         when(myFarm.getNewPony()).thenReturn(mockedPony);
@@ -64,7 +63,7 @@ public class PonyServiceTest {
     }
 
     @Test
-    public void createPony_shouldSaveAPonyWithNameAndArrivalDate() {
+    public void createPony_should_save_a_pony_with_name_and_arrival_date() {
         // Given
         ArgumentCaptor<Pony> ponyArgumentCaptor = ArgumentCaptor.forClass(Pony.class);
 

@@ -1,8 +1,5 @@
 package fr.basileparent.unitTestWorkshop.controller;
 
-import fr.basileparent.unitTestWorkshop.model.Pony;
-import fr.basileparent.unitTestWorkshop.repository.PonyRepository;
-import fr.basileparent.unitTestWorkshop.service.PonyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import fr.basileparent.unitTestWorkshop.model.Pony;
+import fr.basileparent.unitTestWorkshop.repository.PonyRepository;
+import fr.basileparent.unitTestWorkshop.service.PonyService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -32,7 +33,7 @@ public class PonyControllerTest {
     private PonyRepository ponyRepository;
 
     @Test
-    public void registerMale_shouldReturnOk_ifPonyIsMale() throws Exception {
+    public void registerMale_should_return_ok_if_pony_is_male() throws Exception {
         // Given
         when(ponyService.getGender(any(Pony.class))).thenReturn(1);
 
@@ -45,7 +46,7 @@ public class PonyControllerTest {
     }
 
     @Test
-    public void registerMale_shouldReturnBadRequest_ifPonyIsNotMale() throws Exception {
+    public void registerMale_should_return_bad_request_if_pony_is_not_male() throws Exception {
         // Given
         when(ponyService.getGender(any(Pony.class))).thenReturn(2);
 
