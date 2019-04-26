@@ -1,7 +1,9 @@
 package fr.basileparent.unitTestWorkshop.service;
 
-import java.time.LocalDate;
-
+import fr.basileparent.unitTestWorkshop.factory.MyFarm;
+import fr.basileparent.unitTestWorkshop.model.Company;
+import fr.basileparent.unitTestWorkshop.model.Pony;
+import fr.basileparent.unitTestWorkshop.repository.PonyRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -9,9 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import fr.basileparent.unitTestWorkshop.factory.MyFarm;
-import fr.basileparent.unitTestWorkshop.model.Pony;
-import fr.basileparent.unitTestWorkshop.repository.PonyRepository;
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -27,6 +27,9 @@ public class PonyServiceTest {
 
     @Mock
     private PonyRepository ponyRepository;
+
+    @Mock
+    private VATService vatService;
 
     @Before
     public void init() {
@@ -75,6 +78,62 @@ public class PonyServiceTest {
         Pony savedPony = ponyArgumentCaptor.getValue();
         assertEquals("Paulo", savedPony.getName());
         assertEquals(LocalDate.now(), savedPony.getArrivalDate().toLocalDate());
+    }
+
+    @Test
+    public void getSellPrice_should_return_2000_if_age_less_than_3() {
+        // Given
+        Company company = new Company();
+        Pony pony = Pony.builder().age(2).build();
+        when(vatService.getVAT(any(Company.class))).thenReturn(0.0);
+
+        // When
+        Double sellPrice = ponyService.getSellPrice(pony, company);
+
+        // Then
+        assertEquals(Double.valueOf(2000.0), sellPrice);
+    }
+
+    @Test
+    public void getSellPrice_should_return_1000_if_age_equals_3() {
+        // Given
+        Company company = new Company();
+        Pony pony = Pony.builder().age(3).build();
+        when(vatService.getVAT(any(Company.class))).thenReturn(0.0);
+
+        // When
+        Double sellPrice = ponyService.getSellPrice(pony, company);
+
+        // Then
+        assertEquals(Double.valueOf(2000.0), sellPrice);
+    }
+
+    @Test
+    public void getSellPrice_should_return_1000_if_age_more_then_3() {
+        // Given
+        Company company = new Company();
+        Pony pony = Pony.builder().age(4).build();
+        when(vatService.getVAT(any(Company.class))).thenReturn(0.0);
+
+        // When
+        Double sellPrice = ponyService.getSellPrice(pony, company);
+
+        // Then
+        assertEquals(Double.valueOf(1000.0), sellPrice);
+    }
+
+    @Test
+    public void getSellPrice_should_apply_taxes_on_price() {
+        // Given
+        Company company = new Company();
+        Pony pony = Pony.builder().age(2).build();
+        when(vatService.getVAT(any(Company.class))).thenReturn(1.0);
+
+        // When
+        Double sellPrice = ponyService.getSellPrice(pony, company);
+
+        // Then
+        assertEquals(Double.valueOf(2000.0 * 2), sellPrice);
     }
 
 }
