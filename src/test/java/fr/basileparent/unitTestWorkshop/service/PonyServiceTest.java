@@ -53,16 +53,17 @@ public class PonyServiceTest {
     }
 
     @Test
-    public void createPony_should_return_pony_created_by_factory() {
+    public void createPony_should_return_pony_created() {
         // Given
         Pony mockedPony = new Pony();
+        mockedPony.setId(1);
         when(myFarm.getNewPony()).thenReturn(mockedPony);
 
         // When
         Pony pony = ponyService.createPony();
 
         // Then
-        assertEquals(mockedPony, pony);
+        assertEquals(Integer.valueOf(1), pony.getId());
     }
 
     @Test
